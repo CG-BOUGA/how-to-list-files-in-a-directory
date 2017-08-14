@@ -1,7 +1,5 @@
 ```java runnable
 // { autofold
-import static java.nio.file.StandardOpenOption.APPEND;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,11 +10,17 @@ public static void main(String[] args) throws Exception {
 
 // }
 
-Path directory = Paths.get("/etc");
+Path directory = Paths.get("/");
 
-// Method 1: using Streams
+// Method 1: get the files in the given directory
 Files.list(directory)
-  .forEach(path -> System.out.println(path));
+    .filter(Files::isDirectory)
+    .forEach(System.out::println);
+
+// Method 2: recursively run through the tree (at a maximum depth of 2)
+Files.walk(directory, 2)
+    .filter(Files::isRegularFile)
+    .forEach(System.out::println);
 
 //{ autofold
 
