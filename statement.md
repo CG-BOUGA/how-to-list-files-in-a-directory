@@ -1,26 +1,27 @@
-# Welcome!
-
-This Java template lets you get started quickly with a simple one-page playground.
-
-You can create a runnable code snippet using the `runnable` keyword:
-
 ```java runnable
 // { autofold
+import static java.nio.file.StandardOpenOption.APPEND;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Main {
 
-public static void main(String[] args) {
+public static void main(String[] args) throws Exception {
+
 // }
 
-String message = "Hello World!";
-System.out.println(message);
+Path directory = Paths.get("/etc");
+
+// Method 1: using Streams
+Files.list(directory)
+  .forEach(path -> System.out.println(path));
 
 //{ autofold
+
 }
 
 }
 //}
 ```
-
-# Advanced usage
-
-For more complex playgrounds, you can use this [Java template](https://github.com/TechDotIO/java-template)
